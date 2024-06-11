@@ -4,6 +4,7 @@ import styles from "./footer.module.css";
 import React from "react";
 import FooterLink from "./footerLink/FooterLink";
 import Image from "next/image";
+import footerImage from "../../images/footer/footer.svg";
 
 const footerLinks = [
   {
@@ -36,21 +37,21 @@ const Footer = () => {
   return (
     <div className={styles.container}>
       <div className={styles.menu}>
-          <ul className={styles.links}>
-            {footerLinks.map((link, index) => (
-              <li className={styles.linkItem} key={index}>
-                <FooterLink
-                  href={link.path}
-                  title={link.title}
-                  className={styles.link}
-                />
-              </li>
-            ))}
-          </ul>
-        </div>
+        <ul className={styles.links}>
+          {footerLinks.map((link, index) => (
+            <li className={styles.linkItem} key={index}>
+              <FooterLink
+                href={link.path}
+                title={link.title}
+                className={styles.link}
+              />
+            </li>
+          ))}
+        </ul>
+      </div>
       <div className={styles.image}>
         <Image
-          src="/footerImg.png"
+          src={footerImage}
           alt=""
           className={styles.footerImg}
           width={630}

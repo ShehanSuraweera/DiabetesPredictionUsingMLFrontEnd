@@ -1,7 +1,6 @@
 "use client";
 
 import { useState } from "react";
-import styles from "./faq.module.css";
 
 const FAQ = () => {
   const [expanded, setExpanded] = useState(null);
@@ -38,19 +37,21 @@ const FAQ = () => {
   ];
 
   return (
-    <div className={styles.container}>
-      <h1>Common Questions ?</h1>
-      <div className={styles.faqList}>
+    <div className="my-24 mx-0 px-0 py-0 overflow-hidden md:px-36">
+      <h1 className="text-3xl font-bold mb-8">Common Questions ?</h1>
+      <div className="mt-5">
         {faqData.map((faq, index) => (
-          <div key={index} className={styles.faqItem}>
-            <div
-              className={styles.question}
-              onClick={() => toggleExpand(index)}
-            >
+          <div
+            key={index}
+            className="w-full md:w-3/4 mb-2 p-3 cursor-pointer bg-gray-300 rounded-lg"
+          >
+            <div className="font-bold" onClick={() => toggleExpand(index)}>
               {faq.question}
             </div>
             {expanded === index && (
-              <div className={styles.answer}>{faq.answer}</div>
+              <div className="max-h-52 transition-max-height duration-300 ease-in-out overflow-hidden mt-2 leading-relaxed">
+                {faq.answer}
+              </div>
             )}
           </div>
         ))}
