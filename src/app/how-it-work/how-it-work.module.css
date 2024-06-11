@@ -1,0 +1,33 @@
+.container{
+    margin: 0;
+    padding: 0 150px 50px 150px;
+    overflow: hidden;
+}
+
+
+
+.secondContainer, .firstContainer{
+    margin: 150px 0 150px 0;
+    display: flex;
+    flex-direction: column;
+    gap: 45px;
+}
+
+.topPara{
+    padding-left: 20px;
+}
+
+.desc_01{
+    width: 86%;
+    margin-bottom: 50px;
+}
+
+.title_04{
+    width: 80%;
+}
+
+.desc_01 {
+    font-size: 15px;
+    line-height: 1.8; 
+    letter-spacing: 0.05em;
+}

@@ -1,0 +1,175 @@
+.main {
+    margin: 0;
+    padding: 0 150px 50px 150px;
+    overflow: hidden;
+}
+
+
+.firstContainer {
+    display: flex;
+    flex-direction: row; 
+    gap: 45px;
+    margin: 100px 0 20px 0;
+    padding: 0 30px;
+}
+
+.firstContainerLeft {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 45px;
+}
+
+.firstContainerRight {
+    flex: 1;
+    display: flex;
+    justify-content: center; 
+    align-items: center; 
+    margin: auto;
+}
+
+.desc_03 {
+    font-size: 15px;
+    line-height: 1.6;
+    letter-spacing: 0.05em;
+    padding-left: 20px; 
+    text-align: left;
+    margin-bottom: 20px; 
+}
+
+.title_03 {
+    font-size: 18px; 
+}
+
+.heroImg {
+    width: 100%;
+    max-width: 100%;
+    height: auto;
+}
+
+.firstAditionalContainer{
+    margin: 0 0 150px 0;
+    display: flex;
+    flex-direction: column;
+    gap: 45px;
+    padding-left: 12px;
+    padding-right: 12px;
+}
+
+
+/* Second Container */
+.secondContainer {
+    margin: 150px 0 150px 0;
+    display: flex;
+    flex-direction: column;
+    gap: 45px;
+    width: 80%;
+}
+
+.lastContainer {
+    padding: 50px;
+}
+
+.cardtContainer {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap; 
+    justify-content: center;
+    gap: 40px;
+    margin: 50px 0;
+}
+
+.cardBlock {
+    background-color: #32CACD;
+    border-radius: 14px;
+    width: 180px;
+    height: 180px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.lastPara{
+    margin-top: 160px;
+}
+
+
+/* Responsive styles */
+@media (max-width: 1200px) {
+    .firstContainer {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .firstContainerRight {
+        margin: 0;
+    }
+    .cardtContainer {
+        gap: 30px;
+    }
+
+    .cardBlock {
+        width: 150px;
+        height: 150px;
+    }
+}
+
+
+/* Responsive Styles */
+@media (min-width: 768px) {
+
+    .firstContainer {
+        padding: 20px;
+    }
+
+    .desc_03 {
+        font-size: 14px;
+    }
+
+    .title_03 {
+        font-size: 16px;
+    }
+    .lastContainer {
+        padding: 30px;
+    }
+
+    .cardtContainer {
+        gap: 20px;
+    }
+
+    .cardBlock {
+        width: 130px;
+        height: 130px;
+    }
+}
+
+@media (max-width: 480px) {
+    .main {
+        padding: 0 30px 50px 30px;
+    }
+
+    .firstContainer {
+        padding: 10px;
+    }
+
+    .desc_03 {
+        font-size: 12px;
+    }
+
+    .title_03 {
+        font-size: 14px;
+    }
+
+    .lastContainer {
+        padding: 20px;
+    }
+
+    .cardtContainer {
+        gap: 10px;
+    }
+
+    .cardBlock {
+        width: 100px;
+        height: 100px;
+    }
+}
