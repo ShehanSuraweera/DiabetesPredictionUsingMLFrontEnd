@@ -4,37 +4,7 @@ import Link from "next/link";
 import React from "react";
 import NavLink from "./navLink/NavLink";
 import Image from "next/image";
-
-const navLinks = [
-  {
-    title: "Home",
-    path: "/",
-  },
-  {
-    title: "About Us",
-    path: "/about",
-  },
-  {
-    title: "How it Works",
-    path: "/how-it-work",
-  },
-  {
-    title: "Demo",
-    path: "/demo",
-  },
-  {
-    title: "Results",
-    path: "/results",
-  },
-  {
-    title: "FAQ",
-    path: "/faq",
-  },
-  {
-    title: "Contact Us",
-    path: "/contact",
-  },
-];
+import navLinks from "@/data/navLinks";
 
 const Navbar = () => {
   //for mobile navbar
@@ -42,11 +12,11 @@ const Navbar = () => {
 
   return (
     <nav className="bg-[#32CACD]">
-      <div className="container mx-auto flex items-center justify-between px-4 h-20">
-        <Link href={"/"} className="text-white text-lg font-semibold">
+      <div className="container flex items-center justify-between h-20 px-4 mx-auto">
+        <Link href={"/"} className="text-lg font-semibold text-white">
           The Diabetes Project
         </Link>
-        <div className="hidden md:flex items-center gap-4">
+        <div className="items-center hidden gap-4 md:flex">
           <ul className="flex gap-4">
             {navLinks.map((link, index) => (
               <li className="text-white" key={index}>
@@ -79,7 +49,7 @@ const Navbar = () => {
         </div>
 
         {open && (
-          <div className="absolute top-16 right-0 w-full h-screen bg-blue-600 flex flex-col items-center justify-center">
+          <div className="absolute right-0 flex flex-col items-center justify-center w-full h-screen bg-blue-600 top-16">
             <ul className="flex flex-col gap-4">
               {navLinks.map((link, index) => (
                 <li className="text-white" key={index}>

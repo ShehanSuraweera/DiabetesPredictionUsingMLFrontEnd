@@ -1,7 +1,6 @@
 "use client";
 
 import Link from "next/link";
-import styles from "./footerLinks.module.css";
 import { usePathname } from "next/navigation";
 
 const FooterLink = ({ href, title }) => {
@@ -11,7 +10,9 @@ const FooterLink = ({ href, title }) => {
   return (
     <Link
       href={href}
-      className={`${styles.container} ${isActive ? styles.active : ""}`}
+      className={`py-2 px-4 font-medium text-center text-white list-none no-underline ${
+        isActive ? "text-[#6FDFEA]" : "hover:text-blue-200"
+      }`}
     >
       {title}
     </Link>
