@@ -9,6 +9,9 @@ import navLinks from "@/data/navLinks";
 const Navbar = () => {
   //for mobile navbar
   const [open, setOpen] = useState(false);
+  const toggleMobileMenu = () => {
+    setOpen((prev) => !prev);
+  };
 
   return (
     <nav className="bg-[#32CACD]">
@@ -16,7 +19,7 @@ const Navbar = () => {
         <Link href={"/"} className="text-lg font-semibold text-white">
           The Diabetes Project
         </Link>
-        <div className="items-center hidden gap-4 md:flex">
+        <div className="items-center hidden gap-4 lg:flex">
           <ul className="flex gap-4">
             {navLinks.map((link, index) => (
               <li className="text-white" key={index}>
@@ -26,7 +29,7 @@ const Navbar = () => {
           </ul>
         </div>
 
-        <div className="md:hidden">
+        <div className="lg:hidden">
           {open ? (
             <Image
               className="cursor-pointer"
@@ -49,11 +52,15 @@ const Navbar = () => {
         </div>
 
         {open && (
-          <div className="absolute right-0 flex flex-col items-center justify-center w-full h-screen bg-blue-600 top-16">
+          <div className="absolute right-0 flex flex-col items-center justify-center w-[90%] sm:w-[40%] md:w-1/2 h-screen bg-[#32CACD] top-16">
             <ul className="flex flex-col gap-4">
               {navLinks.map((link, index) => (
                 <li className="text-white" key={index}>
-                  <NavLink href={link.path} title={link.title} />
+                  <NavLink
+                    href={link.path}
+                    title={link.title}
+                    onClick={toggleMobileMenu}
+                  />
                 </li>
               ))}
             </ul>
