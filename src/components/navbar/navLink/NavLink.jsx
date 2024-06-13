@@ -4,7 +4,7 @@ import Link from "next/link";
 
 import { usePathname } from "next/navigation";
 
-const NavLink = ({ href, title }) => {
+const NavLink = ({ href, title, onClick }) => {
   const pathName = usePathname();
   const isActive = pathName === href;
 
