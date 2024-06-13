@@ -19,20 +19,10 @@ const Footer = () => {
         </ul>
       </div>
       <div className="relative w-80 h-64 md:w-[300px] md:h-[300px] lg:w-[400px] lg:h-[400px] sm:hidden block">
-        <Image
-          src={footerImage}
-          alt="Footer Illustration"
-          layout="fill"
-          objectFit="contain"
-        />
+        <Image src={footerImage} alt="Footer Illustration" />
       </div>
       <div className="absolute bottom-0 right-5 lg:right-28 w-80 h-80  sm:h-64 md:w-[300px] md:h-[300px] lg:w-[400px] lg:h-[300px] xl:h-[400px] xl:w-[500px] hidden sm:block">
-        <Image
-          src={footerImage}
-          alt="Footer Illustration"
-          layout="fill"
-          objectFit="contain"
-        />
+        <Image src={footerImage} alt="Footer Illustration" />
       </div>
     </div>
   );

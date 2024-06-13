@@ -16,8 +16,8 @@ const Navbar = () => {
   return (
     <nav className="bg-[#32CACD]">
       <div className="container flex items-center justify-between h-20 px-4 mx-auto">
-        <Link href={"/"} className="text-lg font-semibold text-white">
-          The Diabetes Project
+        <Link href={"/"} className="font-sans text-xl font-medium text-white">
+          The Diabetes Predictor
         </Link>
         <div className="items-center hidden gap-4 lg:flex">
           <ul className="flex gap-4">
