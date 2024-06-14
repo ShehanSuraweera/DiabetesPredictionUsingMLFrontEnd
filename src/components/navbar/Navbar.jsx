@@ -52,7 +52,7 @@ const Navbar = () => {
         </div>
 
         {open && (
-          <div className="absolute right-0 flex flex-col items-center justify-center w-[90%] sm:w-[40%] md:w-1/2 h-screen bg-[#32CACD] top-16">
+          <div className="absolute z-50 right-0 flex flex-col items-center justify-center w-[90%] sm:w-[40%] md:w-1/2 h-screen bg-[#32CACD] top-16">
             <ul className="flex flex-col gap-4">
               {navLinks.map((link, index) => (
                 <li className="text-white" key={index}>
