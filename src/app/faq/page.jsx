@@ -29,13 +29,13 @@ const FAQ = () => {
               <div className="font-bold" onClick={() => toggleExpand(index)}>
                 {faq.question}
               </div>
-              <div className="w-8 ">
-                <Image src={drop} alt="Drop down" className="w-full " />
+              <div className="w-8">
+                <Image src={drop} alt="Drop down" className="w-full" />
               </div>
             </div>
             {expanded === index && (
               <div className="mt-2 overflow-hidden leading-relaxed duration-300 ease-in-out max-h-52 transition-max-height">
-                {faq.answer}
+                <div dangerouslySetInnerHTML={{ __html: faq.answer }} />
               </div>
             )}
           </div>
