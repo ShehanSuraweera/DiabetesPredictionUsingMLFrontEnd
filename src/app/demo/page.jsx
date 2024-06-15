@@ -135,6 +135,7 @@ const Demo = () => {
           <div className="flex flex-col mb-4">
             {/* <label className="mb-1 font-bold">Gender :</label> */}
             <Select
+              id="1"
               size="lg"
               required="true"
               label="Gender"
@@ -160,6 +161,7 @@ const Demo = () => {
           <div className="flex flex-col mb-4">
             {/* <label className="mb-1 font-bold">Age :</label> */}
             <Input
+              id="2"
               labelPlacement="outside"
               size="lg"
               label="Age"
@@ -179,6 +181,7 @@ const Demo = () => {
           <div className="flex flex-col mb-4">
             {/* <label className="mb-1 font-bold">Hypertension :</label> */}
             <Select
+              id="3"
               required="true"
               size="lg"
               label="Hypertension"
@@ -208,6 +211,7 @@ const Demo = () => {
           <div className="flex flex-col mb-4">
             {/* <label className="mb-1 font-bold">Heart Disease :</label> */}
             <Select
+              id="4"
               required="true"
               size="lg"
               label="Heart Disease"
@@ -237,6 +241,7 @@ const Demo = () => {
           <div className="flex flex-col mb-4">
             {/* <label className="mb-1 font-bold">Smoking history :</label> */}
             <Select
+              id="5"
               required="true"
               size="lg"
               label="Smoking History "
@@ -272,6 +277,7 @@ const Demo = () => {
           <div className="flex flex-col mb-4">
             {/* <label className="mb-1 font-bold">BMI :</label> */}
             <Input
+              id="6"
               required="true"
               labelPlacement="outside"
               size="lg"
@@ -293,6 +299,7 @@ const Demo = () => {
           <div className="flex flex-col mb-4">
             {/* <label className="mb-1 font-bold">HbA1c Level :</label> */}
             <Input
+              id="7"
               required="true"
               labelPlacement="outside"
               size="lg"
@@ -314,6 +321,7 @@ const Demo = () => {
           <div className="flex flex-col mb-4">
             {/* <label className="mb-1 font-bold">Blood Glucose Level :</label> */}
             <Input
+              id="8"
               required="true"
               labelPlacement="outside"
               size="lg"

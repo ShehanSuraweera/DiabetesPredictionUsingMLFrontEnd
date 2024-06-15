@@ -1,107 +1,57 @@
 import Image from "next/image";
 import aboutImage from "../../images/about/about1.svg";
+import nextJs from "@/images/about/next-js.svg";
+import pythonImage from "@/images/about/python-3.svg";
+import tailwindLogo from "@/images/about/tailwindcss.svg";
+import jupyter from "@/images/about/jupyter.svg";
+import django from "@/images/about/django.svg";
 
 const About = () => {
   return (
-    <div className="m-0 px-8 pb-12 overflow-hidden">
-      <div className="flex flex-col lg:flex-row gap-12 mt-24 mb-5 px-8">
-        <div className="flex-1 flex flex-col gap-12">
-          <h1 className="text-2xl font-bold">Project Team:</h1>
-
-          <h2 className="text-xl font-semibold">
-            John Smith - Project Lead & Data Scientist:
-          </h2>
-
-          <p className="text-sm leading-6 tracking-wide pl-5 text-left mb-5">
-            John is a seasoned data scientist with over 10 years of experience
-            in the field of machine learning and artificial intelligence. He
-            holds a Ph.D. in Computer Science and has published numerous papers
-            on predictive analytics and healthcare technology. John's leadership
-            and expertise drive the innovative approach of our diabetes
-            detection system.
-          </p>
-
-          <h3 className="text-xl font-semibold">
-            Jane Doe - Frontend Developer:
-          </h3>
-
-          <p className="text-sm leading-6 tracking-wide pl-5 text-left mb-5">
-            Jane is a skilled frontend developer specializing in creating
-            interactive and user-friendly web applications. With a background in
-            computer engineering and a passion for UI/UX design, she ensures our
-            platform is accessible and easy to navigate.
-          </p>
-
-          <h3 className="text-xl font-semibold">
-            Michael Brown - Backend Developer:
-          </h3>
-
-          <p className="text-sm leading-6 tracking-wide pl-5 text-left mb-5">
-            Michael is an expert in backend development and database management.
-            He has a master's degree in Software Engineering and has worked on
-            various large-scale projects. Michael's role involves managing the
-            server-side logic, ensuring data security, and maintaining the
-            integrity of our system's operations.
-          </p>
-        </div>
-
-        <div className="flex-1 flex justify-center items-center mx-auto">
-          <Image
-            src={aboutImage}
-            alt=""
-            className="w-full max-w-full h-auto"
-            width={630}
-            height={630}
-          />
+    <div className="px-8 overflow-hidden lg:px-24 xl:px-36 2xl:px-60">
+      <div className="flex flex-col gap-12 mt-5 mb-5 lg:mt-8 sm:mt-12 xl:mt-14">
+        <h1 className="text-2xl font-bold ">Project Team:</h1>
+        <div className="flex flex-col items-center justify-center flex-1 gap-2 sm:-mt-24 sm:flex-row-reverse 2xl">
+          <div className="flex items-center justify-center mx-auto sm:w-1/2">
+            <Image
+              src={aboutImage}
+              alt=""
+              className="w-full h-auto max-w-full"
+              width={630}
+              height={630}
+            />
+          </div>
+          <div className="flex flex-col items-center justify-center w-full sm:w-1/2">
+            <h2 className="mt-2 text-base font-semibold md:text-lg">
+              NADEERA D.L.P. - Project Lead
+            </h2>
+            <h3 className="text-base font-semibold md:text-lg">
+              GUNATHILAKA R.K.W.
+            </h3>
+            <h3 className="text-base font-semibold md:text-lg">
+              SURAWEERA S.A.D.S.N.
+            </h3>
+            <h3 className="text-base font-semibold md:text-lg">
+              WANNIARACHCHI M.C.
+            </h3>
+            <h3 className="text-base font-semibold md:text-lg">
+              KAVINDI W.P.T.
+            </h3>
+            <h3 className="text-base font-semibold md:text-lg">
+              WEERAKOON D.D.
+            </h3>
+          </div>
         </div>
       </div>
 
-      <div className="my-0 mb-36 flex flex-col gap-12 px-3">
-        <h3 className="text-xl font-semibold">
-          Emily White - Machine Learning Engineer:
-        </h3>
-
-        <p className="text-sm leading-6 tracking-wide pl-5 text-left mb-5">
-          Emily specializes in building and optimizing machine learning models.
-          With a background in mathematics and statistics, she has a deep
-          understanding of algorithmic processes and data analysis. Emily's
-          contributions are crucial in developing accurate and reliable
-          predictive models for our diabetes detection system.
-        </p>
-
-        <h3 className="text-xl font-semibold">
-          David Green - Health Consultant:
-        </h3>
-
-        <p className="text-sm leading-6 tracking-wide pl-5 text-left mb-5">
-          David is a certified health professional with a focus on diabetes care
-          and management. He provides valuable insights into the clinical
-          aspects of our project, ensuring that our system aligns with medical
-          standards and practices. David's expertise helps bridge the gap
-          between technology and healthcare.
-        </p>
-
-        <h3 className="text-xl font-semibold">
-          David Green - Health Consultant:
-        </h3>
-
-        <p className="text-sm leading-6 tracking-wide pl-5 text-left mb-5">
-          David is a certified health professional with a focus on diabetes care
-          and management. He provides valuable insights into the clinical
-          aspects of our project, ensuring that our system aligns with medical
-          standards and practices. David's expertise helps bridge the gap
-          between technology and healthcare.
-        </p>
-      </div>
-
-      <div className="my-36 flex flex-col gap-12 w-4/5 mx-auto">
+      <div className="flex flex-col w-full gap-6 mx-auto mt-5 md:my-1 lg:-mt-5">
         <h1 className="text-2xl font-bold">Project Background:</h1>
 
-        <h2 className="text-xl font-semibold">
-          The Motivation Behind the Project:{" "}
+        <h2 className="text-base font-semibold md:text-lg">
+          The Motivation Behind the Project:
         </h2>
 
-        <p className="text-base leading-6 tracking-wide">
+        <p className="-mt-4 text-sm leading-6 tracking-wide md:text-base">
           The prevalence of diabetes is increasing at an alarming rate
           worldwide, posing a significant health challenge. Many individuals are
           unaware of their condition until severe complications arise. Our
@@ -112,9 +62,11 @@ const About = () => {
           health outcomes.
         </p>
 
-        <h2 className="text-xl font-semibold">The Problem Statement:</h2>
+        <h2 className="text-base font-semibold md:text-lg">
+          The Problem Statement:
+        </h2>
 
-        <p className="text-base leading-6 tracking-wide">
+        <p className="-mt-4 text-sm leading-6 tracking-wide md:text-base">
           Diabetes often goes undiagnosed due to a lack of regular screening and
           awareness. Traditional diagnostic methods can be time-consuming and
           inaccessible to many, especially in remote or underserved areas. Our
@@ -125,17 +77,28 @@ const About = () => {
         </p>
       </div>
 
-      <div className="py-12">
+      <div className="pt-12">
         <h1 className="text-2xl font-bold">Technologies Used:</h1>
-        <div className="flex flex-wrap justify-center gap-10 mt-12 mb-12">
-          <div className="bg-teal-500 rounded-lg  w-40 h-40 flex items-center justify-center"></div>
-          <div className="bg-teal-500 rounded-lg w-40 h-40 flex items-center justify-center"></div>
-          <div className="bg-teal-500 rounded-lg w-40 h-40 flex items-center justify-center"></div>
-          <div className="bg-teal-500 rounded-lg w-40 h-40 flex items-center justify-center"></div>
-          <div className="bg-teal-500 rounded-lg w-40 h-40 flex items-center justify-center"></div>
-          <div className="bg-teal-500 rounded-lg w-40 h-40 flex items-center justify-center"></div>
+        <div className="flex flex-wrap justify-center gap-10 mt-12 sm:mb-12">
+          <div className="flex items-center justify-center w-20 h-20 rounded-lg">
+            <Image src={nextJs} alt="NextJS" />
+          </div>
+          <div className="flex items-center justify-center w-20 h-20 rounded-lg">
+            <Image src={pythonImage} alt="Python" />
+          </div>
+          <div className="flex items-center justify-center w-20 h-20 rounded-lg">
+            <Image src={tailwindLogo} alt="Tailwind" />
+          </div>
+          <div className="flex items-center justify-center w-20 h-20 rounded-lg">
+            <Image src={jupyter} alt="Jupyter Notebook" />
+          </div>
+          <div className="flex items-center justify-center w-20 h-20 rounded-lg">
+            <Image src={django} alt="Django" />
+          </div>
+
+          <div className="flex items-center justify-center w-20 h-20 bg-teal-500 rounded-lg"></div>
         </div>
-        <p className="mt-40 text-center">
+        <p className="mt-10 text-center lg:mb-40 md:text-base">
           Each of these technologies plays a crucial role in the development,
           deployment, and operation of our diabetes detection system,
           contributing to its robustness and reliability.

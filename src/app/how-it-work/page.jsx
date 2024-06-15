@@ -1,35 +1,37 @@
+import workFlow from "@/images/howItWorks/workflow.jpg";
+import Image from "next/image";
+
 const HowItWork = () => {
   return (
-    <div className="m-0 p-0 md:px-36 py-12 overflow-hidden">
-      <div className="my-36 flex flex-col gap-12">
-        <h1 className="text-3xl font-bold mb-4">Workflow Diagram</h1>
-        <h2 className="text-2xl font-semibold">Workflow Overview:</h2>
-        <p className="pl-5">
-          Data Collection <br />
-          Data Preprocessing <br />
-          Model Training <br />
-          Prediction Result Interpretation
-        </p>
+    <div className="px-6 py-12 m-0 overflow-hidden sm:px-16 md:px-36">
+      <h1 className="mb-4 text-2xl font-bold">Workflow Diagram</h1>
+      <h2 className="text-xl font-semibold">Workflow Overview:</h2>
+      <div className="flex flex-col items-center justify-center gap-12">
+        <div className="relative flex items-center justify-center w-full max-w-2xl mt-1">
+          <div className="">
+            <Image src={workFlow} alt="workFlow" objectFit="contain" />
+          </div>
+        </div>
       </div>
 
-      <div className="my-36 flex flex-col gap-12">
-        <h1 className="text-3xl font-bold mb-4">Steps Involved</h1>
+      <div className="flex flex-col gap-2 mt-6 sm:mt-16 sm:mb-36">
+        <h1 className="mb-4 text-2xl font-bold">Steps Involved</h1>
 
-        <h2 className="text-2xl font-semibold">1. Data Collection:</h2>
-        <p className="w-10/12 mb-12 text-base leading-8 tracking-wide">
+        <h2 className="text-xl font-semibold">1. Data Collection:</h2>
+        <p className="mb-12 text-base leading-6 tracking-wide ">
           The first step in our workflow is data collection. We gather a variety
           of data points from different sources to build a comprehensive dataset
           for training our machine learning model. The types of data used
           include:
         </p>
 
-        <h2 className="text-2xl font-semibold">2. Data Preprocessing:</h2>
-        <h3 className="text-xl font-medium w-4/5">
+        <h2 className="text-xl font-semibold">2. Data Preprocessing:</h2>
+        <h3 className="text-base font-normal ">
           Once the data is collected, it undergoes preprocessing to ensure it is
           clean, consistent, and suitable for training the machine learning
           model. The preprocessing steps include:
         </h3>
-        <p className="w-10/12 mb-12 text-base leading-8 tracking-wide">
+        <p className="mb-12 text-base leading-6 tracking-wide">
           <b>Data Cleaning:</b> Removing or correcting inaccurate, incomplete,
           or irrelevant data entries. This may involve handling missing values
           and eliminating duplicates.
@@ -44,12 +46,12 @@ const HowItWork = () => {
           accurately.
         </p>
 
-        <h2 className="text-2xl font-semibold">3. Model Training:</h2>
-        <h3 className="text-xl font-medium w-4/5">
+        <h2 className="text-xl font-semibold">3. Model Training:</h2>
+        <h3 className="text-base font-normal ">
           In this step, we use the preprocessed data to train our machine
           learning model. The process involves:
         </h3>
-        <p className="w-10/12 mb-12 text-base leading-8 tracking-wide">
+        <p className="mb-12 text-base leading-6 tracking-wide ">
           <b>Algorithm Selection:</b> Choosing an appropriate machine learning
           algorithm suitable for the task. Common choices include decision
           trees, random forests, support vector machines, and neural networks.
@@ -65,12 +67,12 @@ const HowItWork = () => {
           and F1-score are used to evaluate the results.
         </p>
 
-        <h2 className="text-2xl font-semibold">4. Prediction</h2>
-        <h3 className="text-xl font-medium w-4/5">
+        <h2 className="text-xl font-semibold">4. Prediction</h2>
+        <h3 className="text-base font-normal ">
           Once the model is trained and validated, it is ready to make
           predictions. In this stage:
         </h3>
-        <p className="w-10/12 mb-12 text-base leading-8 tracking-wide">
+        <p className="mb-12 text-base leading-6 tracking-wide ">
           <b>User Input:</b> Users provide their health data through an
           intuitive web interface. The input data typically includes recent
           health metrics and lifestyle information.
@@ -82,8 +84,8 @@ const HowItWork = () => {
           probability score indicating the risk of diabetes.
         </p>
 
-        <h2 className="text-2xl font-semibold">5. Result Interpretation:</h2>
-        <p className="w-10/12 mb-12 text-base leading-8 tracking-wide">
+        <h2 className="text-xl font-semibold">5. Result Interpretation:</h2>
+        <p className="mb-12 text-base leading-6 tracking-wide ">
           The final step involves interpreting the prediction results and
           providing actionable insights to the users. This includes:
         </p>
