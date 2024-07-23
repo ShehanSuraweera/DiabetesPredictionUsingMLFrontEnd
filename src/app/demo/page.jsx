@@ -5,6 +5,7 @@ import Popup from "../../components/popup/Popup";
 import { Select, SelectItem, Input } from "@nextui-org/react";
 import faqImage from "@/images/demo/demo.svg";
 import Image from "next/image";
+import { result } from "@/utility/api/result.api";
 
 const Demo = () => {
   const router = useRouter();
@@ -38,6 +39,7 @@ const Demo = () => {
   const [touchedHypertension, setTouchedHypertension] = useState(false);
   const [touchedHeartDisease, setTouchedHeartDiseas] = useState(false);
   const [touchedSmokingHistory, setTouchedSmokingHistory] = useState(false);
+  const [predictionResults, setPredictionResults] = useState(null);
 
   const handleSelectChange = (key, name) => {
     const value = key.anchorKey;
@@ -82,26 +84,43 @@ const Demo = () => {
 
     setFormErrors(errors);
 
+    const extractNumber = (str) => {
+      const numericString = str.replace(/[^0-9]/g, "");
+
+      // Parse the resulting string as an integer
+      return parseInt(numericString, 10);
+    };
+
     if (valid) {
       // Make an API call to submit the form data
+      const values = {
+        gender: formValues.gender,
+        age: parseInt(formValues.age),
+        heart_disease: extractNumber(formValues.heartDisease),
+        hypertension: extractNumber(formValues.hypertension),
+        smoking_history: extractNumber(formValues.smokingHistory),
+        bmi: parseInt(formValues.bmi),
+        hba1c_level: parseInt(formValues.hba1c),
+        blood_glucose_level: parseInt(formValues.bloodGlucose),
+      };
+
       try {
-        const response = await fetch("/api/submit-form", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify(formValues),
-        });
-        if (response.ok) {
-          console.log(formValues);
-          setPopupMessage("Submitted successfully!");
+        const response = await result(values);
+
+        if (response.status === 200) {
+          const responseData = response.data;
+          setPopupMessage(
+            `Submitted successfully!  Result: ${responseData.result}, Statement: ${responseData.statement}`
+          );
           setIsSuccess(true);
           setIsPopupVisible(true);
 
+          setPredictionResults(response.data);
+
           // Wait a moment before redirecting to the results page
-          setTimeout(() => {
-            router.push("/results");
-          }, 2000);
+          // setTimeout(() => {
+          //   router.push("/results");
+          // }, 2000);
         } else {
           throw new Error("Failed to submit form");
         }
@@ -114,7 +133,7 @@ const Demo = () => {
     } else {
       setPopupMessage("Form has errors. Please fix them and try again.");
       setIsSuccess(false);
-      setIsPopupVisible(false);
+      setIsPopupVisible(true);
     }
   };
 
@@ -137,7 +156,7 @@ const Demo = () => {
             <Select
               id="1"
               size="lg"
-              required="true"
+              required={true}
               label="Gender"
               labelPlacement="outside"
               className="max-w-xs text-base font-medium"
@@ -154,8 +173,12 @@ const Demo = () => {
                 !!formErrors.gender || (touchedGender && !formValues.gender)
               }
             >
-              <SelectItem key="1">Male</SelectItem>
-              <SelectItem key="2">Female</SelectItem>
+              <SelectItem key="male" value="male">
+                Male
+              </SelectItem>
+              <SelectItem key="female" value="female">
+                Female
+              </SelectItem>
             </Select>
           </div>
           <div className="flex flex-col mb-4">
@@ -167,7 +190,7 @@ const Demo = () => {
               label="Age"
               type="number"
               name="age"
-              required="true"
+              required={true}
               className="max-w-xs text-base font-medium"
               value={formValues.age}
               onChange={handleInputChange}
@@ -182,7 +205,7 @@ const Demo = () => {
             {/* <label className="mb-1 font-bold">Hypertension :</label> */}
             <Select
               id="3"
-              required="true"
+              required={true}
               size="lg"
               label="Hypertension"
               labelPlacement="outside"
@@ -204,15 +227,15 @@ const Demo = () => {
                 (touchedHypertension && !formValues.hypertension)
               }
             >
-              <SelectItem value="0">No</SelectItem>
-              <SelectItem value="1">Yes</SelectItem>
+              <SelectItem value={0}>No</SelectItem>
+              <SelectItem value={1}>Yes</SelectItem>
             </Select>
           </div>
           <div className="flex flex-col mb-4">
             {/* <label className="mb-1 font-bold">Heart Disease :</label> */}
             <Select
               id="4"
-              required="true"
+              required={true}
               size="lg"
               label="Heart Disease"
               labelPlacement="outside"
@@ -242,7 +265,7 @@ const Demo = () => {
             {/* <label className="mb-1 font-bold">Smoking history :</label> */}
             <Select
               id="5"
-              required="true"
+              required={true}
               size="lg"
               label="Smoking History "
               labelPlacement="outside"
@@ -278,7 +301,7 @@ const Demo = () => {
             {/* <label className="mb-1 font-bold">BMI :</label> */}
             <Input
               id="6"
-              required="true"
+              required={true}
               labelPlacement="outside"
               size="lg"
               label="BMI"
@@ -300,7 +323,7 @@ const Demo = () => {
             {/* <label className="mb-1 font-bold">HbA1c Level :</label> */}
             <Input
               id="7"
-              required="true"
+              required={true}
               labelPlacement="outside"
               size="lg"
               label="HbA1c Level (%)"
@@ -322,7 +345,7 @@ const Demo = () => {
             {/* <label className="mb-1 font-bold">Blood Glucose Level :</label> */}
             <Input
               id="8"
-              required="true"
+              required={true}
               labelPlacement="outside"
               size="lg"
               label="Blood Glucose Level"
@@ -362,6 +385,13 @@ const Demo = () => {
           isSuccess={isSuccess}
           onClose={closePopup}
         />
+      )}
+
+      {predictionResults !== null && (
+        <>
+          <h1>RESULT:{predictionResults.result}</h1>
+          <p>RISK :{predictionResults.statement}</p>
+        </>
       )}
     </div>
   );

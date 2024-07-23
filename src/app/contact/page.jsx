@@ -48,7 +48,7 @@ const Contact = () => {
                   label="Name"
                   type="text"
                   name="name"
-                  required="true"
+                  required={true}
                   className="w-full text-base font-medium "
                   value={formData.name}
                   onChange={handleChange}
@@ -63,7 +63,7 @@ const Contact = () => {
                   label="Email"
                   type="email"
                   name="email"
-                  required="true"
+                  required={true}
                   className="w-full text-base font-medium "
                   value={formData.email}
                   onChange={handleChange}
@@ -79,7 +79,7 @@ const Contact = () => {
                 label="Subject"
                 type="text"
                 name="subject"
-                required="true"
+                required={true}
                 className="text-base font-medium "
                 value={formData.subject}
                 onChange={handleChange}

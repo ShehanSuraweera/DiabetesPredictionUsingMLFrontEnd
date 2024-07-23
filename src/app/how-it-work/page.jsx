@@ -9,7 +9,11 @@ const HowItWork = () => {
       <div className="flex flex-col items-center justify-center gap-12">
         <div className="relative flex items-center justify-center w-full max-w-2xl mt-1">
           <div className="">
-            <Image src={workFlow} alt="workFlow" objectFit="contain" />
+            <Image
+              src={workFlow}
+              alt="workFlow"
+              style={{ objectFit: "contain" }}
+            />
           </div>
         </div>
       </div>
