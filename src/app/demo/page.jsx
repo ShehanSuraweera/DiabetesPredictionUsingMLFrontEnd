@@ -171,10 +171,10 @@ const Demo = () => {
   };
 
   return (
-    <div className="p-5 pb-12 m-0 overflow-hidden xl:px-36 ">
+    <div className="p-5 pb-12 m-0 overflow-hidden xl:px-5 ">
       <div className="flex   w-[100%] gap-6 p-5 my-12  justify-center items-center">
         <form
-          className="grid grid-cols-1 gap-2 sm:gap-5 sm:grid-cols-2"
+          className="grid min-w-[550px] grid-cols-1 gap-2 sm:gap-5 sm:grid-cols-2"
           onSubmit={handleSubmit}
         >
           <div className="pb-5 text-2xl font-bold sm:col-span-2">
@@ -306,36 +306,14 @@ const Demo = () => {
               </label>
             </div>
           </div>
-
-          {isBmiDirect ? (
-            <div className="flex flex-col mb-4">
-              <Input
-                id="7"
-                labelPlacement="outside"
-                size="lg"
-                label="BMI"
-                type="number"
-                name="bmi"
-                className="max-w-xs text-base font-medium"
-                value={formValues.bmi}
-                onChange={handleInputChange}
-                color="success"
-                status={formErrors.bmi ? "error" : "default"}
-                helperText={formErrors.bmi}
-                errorMessage={
-                  formErrors.bmi ? "Please enter a valid BMI value" : ""
-                }
-                isInvalid={!!formErrors.bmi}
-              />
-            </div>
-          ) : (
+          {!isBmiDirect && (
             <>
               <div className="flex flex-col mb-4">
                 <Input
                   id="5"
                   labelPlacement="outside"
                   size="lg"
-                  label="Weight"
+                  label="Weight (kg)"
                   type="number"
                   name="weight"
                   className="max-w-xs text-base font-medium"
@@ -355,7 +333,7 @@ const Demo = () => {
                   id="6"
                   labelPlacement="outside"
                   size="lg"
-                  label="Height"
+                  label="Height (m)"
                   type="number"
                   name="height"
                   className="max-w-xs text-base font-medium"
@@ -372,6 +350,27 @@ const Demo = () => {
               </div>
             </>
           )}
+          <div className="flex flex-col mb-4">
+            <Input
+              id="7"
+              labelPlacement="outside"
+              size="lg"
+              label="BMI (kg/m²)"
+              type="number"
+              name="bmi"
+              className="max-w-xs text-base font-medium"
+              value={formValues.bmi}
+              onChange={handleInputChange}
+              color="success"
+              status={formErrors.bmi ? "error" : "default"}
+              helperText={formErrors.bmi}
+              errorMessage={
+                formErrors.bmi ? "Please enter a valid BMI value" : ""
+              }
+              isInvalid={!!formErrors.bmi}
+              disabled={!isBmiDirect} // Enable BMI input when checkbox is ticked
+            />
+          </div>
 
           <div className="flex flex-col mb-4">
             {/* <label className="mb-1 font-bold">Smoking history :</label> */}
@@ -439,7 +438,7 @@ const Demo = () => {
               required={true}
               labelPlacement="outside"
               size="lg"
-              label="Blood Glucose Level"
+              label="Blood Glucose Level (mg/dL)"
               type="number"
               name="bloodGlucose"
               className="max-w-xs text-base font-medium"
