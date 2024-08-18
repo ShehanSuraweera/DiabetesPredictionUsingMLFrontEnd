@@ -174,7 +174,7 @@ const Demo = () => {
     <div className="p-5 pb-12 m-0 overflow-hidden xl:px-5 ">
       <div className="flex   w-[100%] gap-6 p-5 my-12  justify-center items-center">
         <form
-          className="grid min-w-[550px] grid-cols-1 gap-2 sm:gap-5 sm:grid-cols-2"
+          className="grid sm:min-w-[550px] grid-cols-1 gap-2 sm:gap-5 sm:grid-cols-2"
           onSubmit={handleSubmit}
         >
           <div className="pb-5 text-2xl font-bold sm:col-span-2">
