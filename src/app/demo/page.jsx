@@ -50,18 +50,21 @@ const Demo = () => {
   const [touchedSmokingHistory, setTouchedSmokingHistory] = useState(false);
   const [predictionResults, setPredictionResults] = useState(null);
   const resultsRef = useRef(null);
+  const [isBmiDirect, setIsBmiDirect] = useState(false);
 
   useEffect(() => {
-    const calculateBMI = () => {
-      const { weight, height } = bmiValue;
-      if (weight && height) {
-        const bmi = (weight / (height * height)).toFixed(2);
-        setFormValues({ ...formValues, bmi });
-      }
-    };
+    if (!isBmiDirect) {
+      const calculateBMI = () => {
+        const { weight, height } = bmiValue;
+        if (weight && height) {
+          const bmi = (weight / (height * height)).toFixed(2);
+          setFormValues({ ...formValues, bmi });
+        }
+      };
 
-    calculateBMI();
-  }, [bmiValue]);
+      calculateBMI();
+    }
+  }, [bmiValue, isBmiDirect]);
 
   const handleSelectChange = (key, name) => {
     const value = key.anchorKey;
@@ -97,14 +100,15 @@ const Demo = () => {
     const errors = {};
 
     for (const key in formValues) {
-      if (formValues[key] === "" || Number(formValues[key]) < 0) {
-        errors[key] =
-          formValues[key] === ""
-            ? `Please enter ${key.replace(/([A-Z])/g, " $1")}`
-            : "Please enter a valid input";
+      if (
+        (isBmiDirect &&
+          key !== "weight" &&
+          key !== "height" &&
+          formValues[key] === "") ||
+        (!isBmiDirect && key !== "bmi" && formValues[key] === "")
+      ) {
+        errors[key] = `Please enter ${key.replace(/([A-Z])/g, " $1")}`;
         valid = false;
-      } else {
-        errors[key] = "";
       }
     }
 
@@ -285,72 +289,90 @@ const Demo = () => {
               <SelectItem value="0">No</SelectItem>
               <SelectItem value="1">Yes</SelectItem>
             </Select>
+            <div className="flex items-center mt-4">
+              <input
+                color="success"
+                type="checkbox"
+                id="bmiDirectCheckbox"
+                checked={isBmiDirect}
+                onChange={(e) => setIsBmiDirect(e.target.checked)}
+                className="mr-2"
+              />
+              <label
+                htmlFor="bmiDirectCheckbox"
+                className="text-base font-medium text-green-600"
+              >
+                Enter BMI directly
+              </label>
+            </div>
           </div>
-          <div className="flex flex-col mb-4">
-            {/* <label className="mb-1 font-bold">Weight :</label> */}
-            <Input
-              id="5"
-              labelPlacement="outside"
-              size="lg"
-              label="Weight"
-              type="number"
-              name="weight"
-              required={true}
-              className="max-w-xs text-base font-medium"
-              value={bmiValue.weight}
-              onChange={handleInputChange}
-              color="success"
-              status={formErrors.weight ? "error" : "default"}
-              helperText={formErrors.weight}
-              errorMessage={
-                formErrors.weight ? "Please input a valid weight" : ""
-              }
-              isInvalid={!!formErrors.weight}
-            />
-          </div>
-          <div className="flex flex-col mb-4">
-            {/* <label className="mb-1 font-bold">Height :</label> */}
-            <Input
-              id="6"
-              labelPlacement="outside"
-              size="lg"
-              label="Height"
-              type="number"
-              name="height"
-              required={true}
-              className="max-w-xs text-base font-medium"
-              value={bmiValue.height}
-              onChange={handleInputChange}
-              color="success"
-              status={formErrors.height ? "error" : "default"}
-              helperText={formErrors.height}
-              errorMessage={
-                formErrors.height ? "Please enter a valid height" : ""
-              }
-              isInvalid={!!formErrors.height}
-            />
-          </div>
-          <div className="flex flex-col mb-4">
-            {/* <label className="mb-1 font-bold">BMI :</label> */}
-            <Input
-              id="7"
-              disabled={true}
-              labelPlacement="outside"
-              size="lg"
-              label="BMI"
-              type="number"
-              name="bmi"
-              className="max-w-xs text-base font-medium"
-              value={formValues.bmi}
-              color="success"
-              status={formErrors.bmi ? "error" : "default"}
-              helperText={formErrors.bmi}
-              errorMessage={
-                formErrors.bmi ? "Please enter a valid BMI value" : ""
-              }
-              isInvalid={!!formErrors.bmi}
-            />
-          </div>
+
+          {isBmiDirect ? (
+            <div className="flex flex-col mb-4">
+              <Input
+                id="7"
+                labelPlacement="outside"
+                size="lg"
+                label="BMI"
+                type="number"
+                name="bmi"
+                className="max-w-xs text-base font-medium"
+                value={formValues.bmi}
+                onChange={handleInputChange}
+                color="success"
+                status={formErrors.bmi ? "error" : "default"}
+                helperText={formErrors.bmi}
+                errorMessage={
+                  formErrors.bmi ? "Please enter a valid BMI value" : ""
+                }
+                isInvalid={!!formErrors.bmi}
+              />
+            </div>
+          ) : (
+            <>
+              <div className="flex flex-col mb-4">
+                <Input
+                  id="5"
+                  labelPlacement="outside"
+                  size="lg"
+                  label="Weight"
+                  type="number"
+                  name="weight"
+                  className="max-w-xs text-base font-medium"
+                  value={bmiValue.weight}
+                  onChange={handleInputChange}
+                  color="success"
+                  status={formErrors.weight ? "error" : "default"}
+                  helperText={formErrors.weight}
+                  errorMessage={
+                    formErrors.weight ? "Please input a valid weight" : ""
+                  }
+                  isInvalid={!!formErrors.weight}
+                />
+              </div>
+              <div className="flex flex-col mb-4">
+                <Input
+                  id="6"
+                  labelPlacement="outside"
+                  size="lg"
+                  label="Height"
+                  type="number"
+                  name="height"
+                  className="max-w-xs text-base font-medium"
+                  value={bmiValue.height}
+                  onChange={handleInputChange}
+                  color="success"
+                  status={formErrors.height ? "error" : "default"}
+                  helperText={formErrors.height}
+                  errorMessage={
+                    formErrors.height ? "Please enter a valid height" : ""
+                  }
+                  isInvalid={!!formErrors.height}
+                />
+              </div>
+            </>
+          )}
+
           <div className="flex flex-col mb-4">
             {/* <label className="mb-1 font-bold">Smoking history :</label> */}
             <Select
