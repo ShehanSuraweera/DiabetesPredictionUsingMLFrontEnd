@@ -260,7 +260,7 @@ const Demo = () => {
               <SelectItem value={1}>Yes</SelectItem>
             </Select>
           </div>
-          <div className="flex flex-col mb-4">
+          <div className="flex flex-col mb-0">
             {/* <label className="mb-1 font-bold">Heart Disease :</label> */}
             <Select
               id="4"
@@ -289,7 +289,7 @@ const Demo = () => {
               <SelectItem value="0">No</SelectItem>
               <SelectItem value="1">Yes</SelectItem>
             </Select>
-            <div className="flex items-center mt-4">
+            <div className="flex items-center justify-start mt-8 sm:justify-end">
               <input
                 color="success"
                 type="checkbox"
@@ -300,7 +300,7 @@ const Demo = () => {
               />
               <label
                 htmlFor="bmiDirectCheckbox"
-                className="text-base font-medium text-green-600"
+                className="text-base font-normal text-green-600"
               >
                 Enter BMI directly
               </label>
