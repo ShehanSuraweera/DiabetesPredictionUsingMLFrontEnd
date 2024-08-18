@@ -1,14 +1,16 @@
 "use client";
 import { useRouter } from "next/navigation";
-import React, { useState } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import Popup from "../../components/popup/Popup";
 import { Select, SelectItem, Input } from "@nextui-org/react";
 import faqImage from "@/images/demo/demo.svg";
 import Image from "next/image";
 import { result } from "@/utility/api/result.api";
+import ResultsDisplay from "../../components/ResultsDisplay";
 
 const Demo = () => {
   const router = useRouter();
+  let riskScore = 0;
 
   const [formValues, setFormValues] = useState({
     gender: "",
@@ -21,6 +23,11 @@ const Demo = () => {
     bloodGlucose: "",
   });
 
+  const [bmiValue, setBmiValue] = useState({
+    weight: "",
+    height: "",
+  });
+
   const [formErrors, setFormErrors] = useState({
     gender: "",
     age: "",
@@ -30,6 +37,8 @@ const Demo = () => {
     bmi: "",
     hba1c: "",
     bloodGlucose: "",
+    weight: "",
+    height: "",
   });
 
   const [isPopupVisible, setIsPopupVisible] = useState(false);
@@ -40,6 +49,19 @@ const Demo = () => {
   const [touchedHeartDisease, setTouchedHeartDiseas] = useState(false);
   const [touchedSmokingHistory, setTouchedSmokingHistory] = useState(false);
   const [predictionResults, setPredictionResults] = useState(null);
+  const resultsRef = useRef(null);
+
+  useEffect(() => {
+    const calculateBMI = () => {
+      const { weight, height } = bmiValue;
+      if (weight && height) {
+        const bmi = (weight / (height * height)).toFixed(2);
+        setFormValues({ ...formValues, bmi });
+      }
+    };
+
+    calculateBMI();
+  }, [bmiValue]);
 
   const handleSelectChange = (key, name) => {
     const value = key.anchorKey;
@@ -50,7 +72,11 @@ const Demo = () => {
   const handleInputChange = (e) => {
     const { name, value } = e.target;
     if (value > 0) {
-      setFormValues({ ...formValues, [name]: value });
+      if (name === "weight" || name === "height") {
+        setBmiValue((prev) => ({ ...prev, [name]: parseFloat(value) }));
+      } else {
+        setFormValues((prev) => ({ ...prev, [name]: value }));
+      }
       validateField(name, value);
     }
   };
@@ -95,12 +121,12 @@ const Demo = () => {
       // Make an API call to submit the form data
       const values = {
         gender: formValues.gender,
-        age: parseInt(formValues.age),
-        heart_disease: extractNumber(formValues.heartDisease),
-        hypertension: extractNumber(formValues.hypertension),
-        smoking_history: extractNumber(formValues.smokingHistory),
+        age: parseInt(formValues.age, 10),
+        heart_disease: extractNumber(formValues.heartDisease, 10),
+        hypertension: extractNumber(formValues.hypertension, 10),
+        smoking_history: extractNumber(formValues.smokingHistory, 10),
         bmi: parseInt(formValues.bmi),
-        hba1c_level: parseInt(formValues.hba1c),
+        HbA1c_level: parseInt(formValues.hba1c),
         blood_glucose_level: parseInt(formValues.bloodGlucose),
       };
 
@@ -109,18 +135,16 @@ const Demo = () => {
 
         if (response.status === 200) {
           const responseData = response.data;
-          setPopupMessage(
-            `Submitted successfully!  Result: ${responseData.result}, Statement: ${responseData.statement}`
-          );
+          setPredictionResults({
+            result: String(responseData.result),
+            statement: String(responseData.statement),
+          });
+          // Scroll to the ResultsDisplay component
+          if (resultsRef.current) {
+            resultsRef.current.scrollIntoView({ behavior: "smooth" });
+          }
           setIsSuccess(true);
-          setIsPopupVisible(true);
-
-          setPredictionResults(response.data);
-
-          // Wait a moment before redirecting to the results page
-          // setTimeout(() => {
-          //   router.push("/results");
-          // }, 2000);
+          setPopupMessage("Submission successful!");
         } else {
           throw new Error("Failed to submit form");
         }
@@ -139,6 +163,7 @@ const Demo = () => {
 
   const closePopup = () => {
     setIsPopupVisible(false);
+    //router.push("/results");
   };
 
   return (
@@ -262,9 +287,74 @@ const Demo = () => {
             </Select>
           </div>
           <div className="flex flex-col mb-4">
+            {/* <label className="mb-1 font-bold">Weight :</label> */}
+            <Input
+              id="5"
+              labelPlacement="outside"
+              size="lg"
+              label="Weight"
+              type="number"
+              name="weight"
+              required={true}
+              className="max-w-xs text-base font-medium"
+              value={bmiValue.weight}
+              onChange={handleInputChange}
+              color="success"
+              status={formErrors.weight ? "error" : "default"}
+              helperText={formErrors.weight}
+              errorMessage={
+                formErrors.weight ? "Please input a valid weight" : ""
+              }
+              isInvalid={!!formErrors.weight}
+            />
+          </div>
+          <div className="flex flex-col mb-4">
+            {/* <label className="mb-1 font-bold">Height :</label> */}
+            <Input
+              id="6"
+              labelPlacement="outside"
+              size="lg"
+              label="Height"
+              type="number"
+              name="height"
+              required={true}
+              className="max-w-xs text-base font-medium"
+              value={bmiValue.height}
+              onChange={handleInputChange}
+              color="success"
+              status={formErrors.height ? "error" : "default"}
+              helperText={formErrors.height}
+              errorMessage={
+                formErrors.height ? "Please enter a valid height" : ""
+              }
+              isInvalid={!!formErrors.height}
+            />
+          </div>
+          <div className="flex flex-col mb-4">
+            {/* <label className="mb-1 font-bold">BMI :</label> */}
+            <Input
+              id="7"
+              disabled={true}
+              labelPlacement="outside"
+              size="lg"
+              label="BMI"
+              type="number"
+              name="bmi"
+              className="max-w-xs text-base font-medium"
+              value={formValues.bmi}
+              color="success"
+              status={formErrors.bmi ? "error" : "default"}
+              helperText={formErrors.bmi}
+              errorMessage={
+                formErrors.bmi ? "Please enter a valid BMI value" : ""
+              }
+              isInvalid={!!formErrors.bmi}
+            />
+          </div>
+          <div className="flex flex-col mb-4">
             {/* <label className="mb-1 font-bold">Smoking history :</label> */}
             <Select
-              id="5"
+              id="8"
               required={true}
               size="lg"
               label="Smoking History "
@@ -297,32 +387,11 @@ const Demo = () => {
               </p>
             )}
           </div>
-          <div className="flex flex-col mb-4">
-            {/* <label className="mb-1 font-bold">BMI :</label> */}
-            <Input
-              id="6"
-              required={true}
-              labelPlacement="outside"
-              size="lg"
-              label="BMI"
-              type="number"
-              name="bmi"
-              className="max-w-xs text-base font-medium"
-              value={formValues.bmi}
-              onChange={handleInputChange}
-              color="success"
-              status={formErrors.bmi ? "error" : "default"}
-              helperText={formErrors.bmi}
-              errorMessage={
-                formErrors.bmi ? "Please enter a valid BMI value" : ""
-              }
-              isInvalid={!!formErrors.bmi}
-            />
-          </div>
+
           <div className="flex flex-col mb-4">
             {/* <label className="mb-1 font-bold">HbA1c Level :</label> */}
             <Input
-              id="7"
+              id="9"
               required={true}
               labelPlacement="outside"
               size="lg"
@@ -344,7 +413,7 @@ const Demo = () => {
           <div className="flex flex-col mb-4">
             {/* <label className="mb-1 font-bold">Blood Glucose Level :</label> */}
             <Input
-              id="8"
+              id="10"
               required={true}
               labelPlacement="outside"
               size="lg"
@@ -386,13 +455,11 @@ const Demo = () => {
           onClose={closePopup}
         />
       )}
-
-      {predictionResults !== null && (
-        <>
-          <h1>RESULT:{predictionResults.result}</h1>
-          <p>RISK :{predictionResults.statement}</p>
-        </>
-      )}
+      <div ref={resultsRef}>
+        {predictionResults && (
+          <ResultsDisplay results={predictionResults} values={formValues} />
+        )}
+      </div>
     </div>
   );
 };
